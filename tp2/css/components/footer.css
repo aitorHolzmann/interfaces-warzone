@@ -1,0 +1,217 @@
+/* COMPONENTE FAT FOOTER INSTITUCIONAL OPTIMIZADO CON OPERADORES RELATIVOS Y ELIMINACION DE WRAPPERS INNECESARIOS */
+
+.footer-principal {
+  position: relative;
+  width: 100%;
+  margin-top: 60px;
+  overflow: hidden;
+
+  background-color: var(--color-primario-oscuro);
+  border-top: 1px solid var(--color-secundario);
+  border-radius: var(--radio-card) var(--radio-card) 0 0;
+  color: var(--color-blanco);
+  font-size: var(--tamano-small);
+}
+
+.footer-principal h4 {
+  width: 100%;
+  margin-bottom: 14px;
+
+  font-size: var(--tamano-h3);
+  border-bottom: 1.5px solid var(--color-blanco);
+  text-align: center;
+}
+
+.footer-principal a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  white-space: nowrap;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-principal a:hover {
+  transform: translateX(4px);
+
+  color: var(--color-secundario);
+}
+
+/* CONTENEDOR PRINCIPAL CAJAS PRINCIPALES */
+.footer-principal > .footer-contenedor {
+  width: 100%;
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: 40px 24px;
+
+  /* DISPOSICION INTERNA MOBILE FIRST COLUMNA CENTRADA */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* CAJA MARCA Y DESCRIPCION IZQUIERDA EN DESKTOP */
+.footer-contenedor > .footer-marca {
+  width: 100%;
+  max-width: 360px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  text-align: center;
+}
+
+.footer-marca > img {
+  width: auto;
+  height: 190px;
+
+  object-fit: contain;
+}
+
+.footer-marca > p {
+  width: 100%;
+  max-width: 360px;
+
+  font-size: inherit;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* CAJA GRILLA DE ENLACES Y NAVEGACION DERECHA EN DESKTOP */
+.footer-contenedor > .footer-links-grid {
+  width: 100%;
+  max-width: 970px;
+
+  /* DISPOSICION INTERNA MOBILE FIRST COLUMNA CENTRADA */
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  justify-items: center;
+
+  text-align: center;
+}
+
+.footer-links-grid > div {
+  width: 100%;
+  max-width: 260px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-links-grid ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  list-style: none;
+}
+
+.footer-links-grid a img {
+  width: 18px;
+  height: 18px;
+
+  object-fit: contain;
+}
+
+/* BLOQUE SOPORTE OCUPA TODO EL ANCHO DE LA GRILLA DE LINKS */
+.footer-links-grid > .footer-soporte {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  text-align: center;
+}
+
+.footer-soporte > h4 {
+  max-width: 620px;
+}
+
+.footer-soporte > div {
+  width: 100%;
+  max-width: 620px;
+
+  /* DISPOSICION INTERNA GRILLA DE LINKS DE SOPORTE */
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  justify-items: center;
+
+  text-align: center;
+}
+
+/* BARRA INFERIOR DE COPYRIGHT */
+.footer-principal > .footer-bottom {
+  padding: 16px 20px;
+
+  background-color: var(--color-primario-oscuro2);
+  text-align: center;
+}
+
+.footer-bottom > p {
+  margin: 0;
+
+  font-size: var(--tamano-small);
+  line-height: 1.4;
+}
+
+/* RESPONSIVE TABLET MIN WIDTH PX */
+@media (min-width: 600px) {
+  .footer-principal {
+    font-size: var(--tamano-body);
+  }
+
+  .footer-contenedor > .footer-links-grid {
+    /* DISPOSICION INTERNA COLUMNAS DE NAVEGACION */
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-links-grid > div {
+    max-width: 100%;
+
+    align-items: flex-start;
+  }
+
+  .footer-links-grid > div > h4 {
+    text-align: left;
+  }
+
+  .footer-links-grid ul {
+    align-items: flex-start;
+  }
+
+  .footer-links-grid > .footer-soporte {
+    grid-column: 1 / -1;
+  }
+
+  .footer-soporte > h4 {
+    text-align: center;
+  }
+
+  .footer-soporte > div {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: start;
+
+    text-align: left;
+  }
+}
+
+/* RESPONSIVE DESKTOP MIN WIDTH PX */
+@media (min-width: 992px) {
+  .footer-principal > .footer-contenedor {
+    /* DISPOSICION INTERNA CAJAS LADO A LADO */
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 150px;
+  }
+}

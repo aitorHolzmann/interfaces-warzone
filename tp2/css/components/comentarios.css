@@ -1,0 +1,198 @@
+/* COMPONENTE COMENTARIOS FIDELIDAD FIGMA OPTIMIZADO CON OPERADORES RELATIVOS Y ETIQUETAS SEMANTICAS */
+
+.seccion-comentarios {
+  width: 100%;
+  max-width: 960px;
+  margin: 40px auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.seccion-comentarios > h2 {
+  color: var(--color-blanco);
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* FORMULARIO DE ENTRADA DE COMENTARIO */
+.comentario-form {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* AUTOR ACTUAL AVATAR CON NOMBRE DEBAJO */
+.comentario-autor-actual {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.comentario-autor-actual > div {
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-superficie-oscura);
+  border: 1.5px solid var(--color-secundario);
+  border-radius: var(--radio-redondo);
+}
+
+.comentario-autor-actual img {
+  width: 32px;
+  height: 32px;
+}
+
+.comentario-autor-actual > span {
+  color: var(--color-blanco);
+  font-size: 11px;
+  text-align: center;
+}
+
+/* BARRA DE ENTRADA BLANCA ESTILO PILDORA */
+.comentario-input-barra {
+  min-height: 44px;
+  padding: 4px 12px 4px 20px;
+
+  display: flex;
+  flex: 1;
+  align-items: center;
+
+  background-color: var(--color-blanco);
+  border-radius: 25px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.comentario-input-barra > textarea,
+.comentario-input-barra > input {
+  width: 100%;
+  max-height: 20px;
+  padding: 0;
+
+  display: block;
+  flex: 1;
+
+  background: transparent;
+  color: var(--color-negro);
+  font-size: var(--tamano-small);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  resize: none;
+}
+
+.comentario-input-barra > textarea:focus,
+.comentario-input-barra > input:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.comentario-input-barra > textarea::placeholder,
+.comentario-input-barra > input::placeholder {
+  color: var(--color-gris-neutro);
+}
+
+.comentario-input-barra > button {
+  padding: 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.comentario-input-barra > button:hover {
+  transform: scale(1.15);
+}
+
+.comentario-input-barra > button img {
+  width: 26px;
+  height: 26px;
+}
+
+/* LISTA ABIERTA DE COMENTARIOS */
+.comentarios-lista {
+  padding-left: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.comentario-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.comentario-item > div:first-child {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-superficie-oscura);
+  border: 1px solid var(--color-primario-claro2);
+  border-radius: var(--radio-redondo);
+}
+
+.comentario-item > div:first-child img {
+  width: 30px;
+  height: 30px;
+}
+
+.comentario-item > div:last-child {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.comentario-item header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.comentario-item header strong {
+  color: var(--color-primario-claro);
+  font-size: var(--tamano-small);
+  font-weight: 700;
+}
+
+.comentario-item header time {
+  color: var(--color-gris-neutro);
+  font-size: var(--tamano-small);
+}
+
+.comentario-item p {
+  margin: 0;
+
+  color: var(--color-blanco);
+  font-size: var(--tamano-small);
+  line-height: 1.5;
+  word-break: break-word;
+}

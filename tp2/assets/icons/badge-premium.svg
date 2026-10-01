@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 239 214" width="239" height="214" fill="none">
+  <!-- Corona Faceta Izquierda -->
+  <path d="M 119.5 14
+           L 88 73.5
+           C 79.5 89, 68.4 79, 64 75.5
+           L 17.5 40
+           L 44 161
+           L 119.5 193.5
+           Z"
+        fill="#FBB039" />
+  <!-- Corona Faceta Derecha -->
+  <path d="M 119.5 14
+           L 151 73.5
+           C 159.5 89, 170.6 79, 175 75.5
+           L 221.5 40
+           L 195 161
+           L 119.5 193.5
+           Z"
+        fill="#F7941F" />
+</svg>
