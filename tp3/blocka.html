@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLOCKA — Sala de Juego</title>
+  
+  <!-- ESTILOS DEL SISTEMA -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components/botones.css">
+  <link rel="stylesheet" href="css/components/formularios.css">
+  <link rel="stylesheet" href="css/components/navegacion.css">
+  <link rel="stylesheet" href="css/components/comentarios.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACION SUPERIOR NAVBAR -->
+  <header class="nav-principal">
+    <div class="nav-contenedor">
+      
+      <div class="nav-izquierda">
+        <button id="btn-toggle-sidebar" aria-label="Abrir menú de navegación">
+          <img src="assets/icons/menu.svg" alt="Menú lateral">
+        </button>
+        <a href="index.html" title="Volver a la página principal">
+          <img src="assets/logo.png" alt="Logotipo Plataforma">
+        </a>
+      </div>
+
+      <div class="nav-centro">
+        <form role="search" onsubmit="event.preventDefault();">
+          <input type="search" placeholder="Buscar juegos, géneros o batallas..." aria-label="Buscar juegos">
+          <button type="submit" aria-label="Ejecutar búsqueda">
+            <img src="assets/icons/icon-search.svg" alt="Buscar">
+          </button>
+        </form>
+      </div>
+
+      <!-- Menú de usuario -->
+      <div class="nav-derecha">
+        <div class="perfil-menu-contenedor">
+          <button type="button" id="btn-perfil" aria-expanded="false" aria-haspopup="true" aria-controls="menu-perfil" aria-label="Abrir opciones de usuario">
+            <img src="assets/icons/icon-profile.svg" alt="Avatar del soldado">
+          </button>
+
+          <div class="menu-desplegable-perfil" id="menu-perfil" role="menu" aria-label="Opciones de perfil">
+            <ul>
+              <li role="none"><a href="#" role="menuitem">Editar Perfil</a></li>
+              <li role="none"><a href="#" role="menuitem">Biblioteca</a></li>
+              <li role="none"><a href="login.html" role="menuitem">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- SIDEBAR OFF CANVAS -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <header>
+      <img src="assets/logo.png" alt="Logo" style="height: 36px;">
+      <button id="btn-cerrar-sidebar" aria-label="Cerrar menú">
+        <img src="assets/icons/icon-cerrar.svg" alt="Cerrar">
+      </button>
+    </header>
+    <span>Navegación</span>
+    <ul>
+      <li><a href="index.html"><img src="assets/icons/icon-home.svg" alt=""><span>Inicio</span></a></li>
+      <li><a href="index.html#top"><img src="assets/icons/icon-top.svg" alt=""><span>Top Juegos</span></a></li>
+      <li class="activo"><a href="index.html#premium"><img src="assets/icons/icon-premium.svg" alt=""><span>Juegos Premium</span></a></li>
+      <li><a href="index.html#accion"><img src="assets/icons/icon-action.svg" alt=""><span>Acción</span></a></li>
+      <li><a href="index.html#aventura"><img src="assets/icons/icon-adventure.svg" alt=""><span>Aventura</span></a></li>
+      <li><a href="index.html#estrategia"><img src="assets/icons/icon-strategy.svg" alt=""><span>Estrategia</span></a></li>
+      <li><a href="index.html#deportes"><img src="assets/icons/icon-sports.svg" alt=""><span>Deportes</span></a></li>
+    </ul>
+  </aside>
+
+  <main class="pagina-juego-main">
+
+    <nav class="breadcrumbs" aria-label="Ruta de navegación">
+      <a href="index.html">Home</a> &gt; <a href="index.html#top" id="game-breadcrumb-categoria">Catálogo</a> &gt; <span id="game-breadcrumb-titulo">BLOCKA</span>
+    </nav>
+
+    <!-- Área de Juego -->
+    <section class="area-ejecucion-juego" aria-label="Área de Juego">
+      
+      <div id="game-splash-pantalla">
+        <div class="blocka-splash-contenido" id="blocka-splash-menu"></div>
+        <div class="blocka-aviso-pantalla-pequena" aria-hidden="true">
+          <h3>PANTALLA DE ESCRITORIO REQUERIDA</h3>
+          <p>BLOCKA está diseñado para jugarse en pantalla de escritorio con mouse (clics izquierdo y derecho). Agrandá la ventana para jugar.</p>
+        </div>
+      </div>
+
+      <div class="barra-ejecucion">
+        <span id="game-barra-titulo">BLOCKA</span>
+
+        <!-- HUD de juego -->
+        <div class="blocka-hud" id="blocka-hud" style="display: none;">
+          <button type="button" id="btn-blocka-salir" class="btn-blocka-salir" title="Salir al menú principal del juego">
+            ← Salir
+          </button>
+          <div class="blocka-hud-info">
+            <span class="blocka-nivel" id="blocka-nivel">Nivel 1</span>
+            <div class="blocka-timer-wrapper">
+              <span class="blocka-timer" id="blocka-timer">0s</span>
+            </div>
+          </div>
+          <button type="button" id="btn-blocka-ayuda" class="btn-blocka-ayuda" title="Ubicar y fijar una subimagen (+5s)">
+            💡 Ayudita <span class="ayuda-costo">(+5s)</span>
+          </button>
+        </div>
+
+        <div class="barra-ejecucion-acciones">
+          <span class="blocka-record" id="blocka-record" style="display: none;">Récord: --</span>
+          <div class="barra-ejecucion-iconos">
+            <button id="btn-guardar-juego" title="Guardar">
+              <img src="assets/icons/icon-save.svg" alt="Guardar">
+            </button>
+
+            <button id="btn-compartir-juego" title="Compartir">
+              <img src="assets/icons/icon-share.svg" alt="Compartir">
+            </button>
+
+            <button id="btn-fullscreen" title="Pantalla Completa">
+              <img src="assets/icons/icon-fullscreen.svg" alt="Pantalla Completa">
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Instrucciones y Galería -->
+    <section class="seccion-about-juego" aria-label="Instrucciones y Galería">
+      
+      <div class="contenedor-instrucciones">
+        <h2>COMO JUGAR?</h2>
+        
+        <div class="lista-reglas">
+          <div class="card-controles">
+            <h3>Controles</h3>
+            <img src="assets/icons/icon-mouse.svg" alt="Controles con mouse">
+            <p>Clic izquierdo y derecho para rotar</p>
+          </div>
+
+          <article>
+            <h3>Objetivo</h3>
+            <p>Rotá las piezas de la imagen hasta que todas queden en su orientación correcta y se revele la imagen original a todo color.</p>
+          </article>
+
+          <article>
+            <h3>Rotación</h3>
+            <p>Clic izquierdo rota la pieza 90° a la izquierda (antihorario). Clic derecho rota 90° a la derecha (horario). Completá los niveles con filtros distintos.</p>
+          </article>
+
+          <article>
+            <h3>Ayudita y Modo Contrarreloj</h3>
+            <p>Usá el botón 💡 Ayudita si te trabás: ubica y bloquea una subimagen sumando +5s de penalización. Si activás el Modo Contrarreloj en el menú, debés resolver la Blocka antes del tiempo límite del nivel.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Galería -->
+      <div class="contenedor-galeria">
+        <h2>GALERIA</h2>
+        
+        <div class="galeria-grilla">
+          <div>
+            <img src="assets/images/peg_solitaire_hero.jpg" alt="Despliegue inicial">
+          </div>
+          
+          <div>
+            <img src="assets/images/game_solitaire_1.jpg" alt="Avance táctico">
+            <div class="btn-galeria-play" title="Ver jugada">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <polygon points="18,12 36,24 18,36" fill="#FF6B00"></polygon>
+              </svg>
+            </div>
+          </div>
+
+          <div>
+            <img src="assets/images/game_scifi_2.jpg" alt="Objetivo final">
+          </div>
+
+          <div>
+            <img src="assets/images/game_action_1.jpg" alt="Victoria total">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Comentarios -->
+    <section class="seccion-comentarios" aria-label="Comentarios">
+      <h2>COMENTARIOS</h2>
+
+      <form class="comentario-form" id="form-nuevo-comentario" onsubmit="event.preventDefault();">
+        <div class="comentario-autor-actual">
+          <div>
+            <img src="assets/icons/icon-profile.svg" alt="Esteban">
+          </div>
+          <span>Esteban</span>
+        </div>
+
+        <div class="comentario-input-barra">
+          <textarea placeholder="Escribe algo..." id="input-comentario"></textarea>
+         
+          <button type="button" aria-label="Enviar comentario">
+            <img src="assets/icons/icon-send.svg" alt="Enviar">
+          </button>
+        </div>
+      </form>
+
+      <div class="comentarios-lista" id="lista-comentarios">
+        <article class="comentario-item">
+          <div>
+            <img src="assets/icons/icon-profile.svg" alt="Esteban">
+          </div>
+          <div>
+            <header>
+              <strong>Esteban</strong>
+              <time>25/09/2026 12:15</time>
+            </header>
+            <p>
+              Tu cuartel general para los mejores juegos de estrategia militar, shooters tácticos y colecciones premium. Únete a la batalla. Tu cuartel general para los mejores juegos de estrategia militar, shooters tácticos y colecciones premium. Únete a la b...
+            </p>
+          </div>
+        </article>
+
+        <article class="comentario-item">
+          <div>
+            <img src="assets/icons/icon-profile.svg" alt="Aitor">
+          </div>
+          <div>
+            <header>
+              <strong>Aitor</strong>
+              <time>25/09/2026 11:30</time>
+            </header>
+            <p>
+              Hola como estan amigosHola como estan amigosHola como estan amigosHola como estan amigosHola como estan amigosHola como estan amigosHola como estan amigosHola como estan amigosHola como estan amigosHola como estan
+            </p>
+          </div>
+        </article>
+
+        <article class="comentario-item">
+          <div>
+            <img src="assets/icons/icon-profile.svg" alt="Esteban">
+          </div>
+          <div>
+            <header>
+              <strong>Esteban</strong>
+              <time>24/09/2026 18:45</time>
+            </header>
+            <p>
+              ME ENCANTA DISENIAR INTERFACES
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FAT FOOTER INSTITUCIONAL -->
+  <footer class="footer-principal">
+    <div class="footer-contenedor">
+       
+      <!-- CAJA MARCA Y DESCRIPCION -->
+      <div class="footer-marca">
+        <img src="assets/logo.png" alt="Logotipo Plataforma">
+        <p>
+          Tu cuartel general para los mejores juegos de estrategia militar, shooters tácticos y colecciones premium. Únete a la batalla.
+        </p>
+      </div>
+
+      <!-- CAJA CONTENEDOR DE LINKS GRID -->
+      <div class="footer-links-grid">
+        <div>
+          <h4>Sobre nosotros</h4>
+          <ul>
+            <li><a href="#">Ayuda</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">Privacidad</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Categorias</h4>
+          <ul>
+            <li><a href="index.html#top">Top</a></li>
+            <li><a href="index.html#premium">Premium</a></li>
+            <li><a href="index.html#accion">Accion</a></li>
+            <li><a href="index.html#aventura">Aventura</a></li>
+            <li><a href="index.html#deportes">Deportes</a></li>
+            <li><a href="index.html#estrategia">Estrategia</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="#"><img src="assets/icons/icon-share.svg" alt=""> Compartir</a></li>
+            <li><a href="#"><img src="assets/icons/icon-instagram.svg" alt=""> Instagram</a></li>
+            <li><a href="#"><img src="assets/icons/icon-tiktok.svg" alt=""> TikTok</a></li>
+            <li><a href="#"><img src="assets/icons/icon-x.svg" alt=""> X</a></li>
+          </ul>
+        </div>
+
+        <!-- SECCION SOPORTE DENTRO DEL BLOQUE DE NAVEGACION -->
+        <div class="footer-soporte">
+          <h4>Soporte</h4>
+          <div>
+            <a href="#">Centro de Ayuda</a>
+            <a href="#">Reportar un Bug</a>
+            <a href="#">Soporte</a>
+            <a href="#">Reglas de la comunidad</a>
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Guias de juego</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BARRA INFERIOR -->
+    <div class="footer-bottom">
+      <p>© Copyright - 2026</p>
+      <p>Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Scripts del juego Blocka -->
+  <script src="js/blocka/filtros.js"></script>
+  <script src="js/blocka/configuracion.js"></script>
+  <script src="js/blocka/Pieza.js"></script>
+  <script src="js/blocka/Tablero.js"></script>
+  <script src="js/blocka/blocka.js"></script>
+</body>
+</html>

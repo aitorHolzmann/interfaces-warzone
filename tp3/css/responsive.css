@@ -1,0 +1,174 @@
+/* RESPONSIVE DESIGN ENFOQUE MOBILE FIRST HOME REQUERIMIENTO MANDATORIO N DE CATEDRA OPTIMIZADO CON OPERADORES RELATIVOS Y HERENCIA LIMPIA */
+
+/* AJUSTES BASE MOBILE PX */
+.carrusel-principal-contenedor {
+  gap: 16px;
+}
+
+.carrusel-principal-escena-3d {
+  width: 270px;
+  height: 200px;
+
+  perspective: 650px;
+}
+
+.carrusel-principal-tarjeta-3d.cara-1 {
+  transform: rotateY(0deg) translateZ(120px);
+}
+
+.carrusel-principal-tarjeta-3d.cara-2 {
+  transform: rotateY(120deg) translateZ(120px);
+}
+
+.carrusel-principal-tarjeta-3d.cara-3 {
+  transform: rotateY(240deg) translateZ(120px);
+}
+
+.carrusel-principal-juego-nombre,
+.carrusel-principal-tarjeta-3d h3 {
+  font-size: 18px;
+}
+
+.card-juego {
+  width: 210px;
+  min-width: 210px;
+  height: 155px;
+}
+
+/* TABLET Y PANTALLAS MEDIANAS */
+@media (min-width: 768px) {
+  .seccion-carrusel-principal > h2,
+  .carrusel-principal-titulo {
+    font-size: 2.2rem;
+  }
+
+  .carrusel-principal-contenedor {
+    gap: 45px;
+  }
+
+  .carrusel-principal-escena-3d {
+    width: 360px;
+    height: 260px;
+
+    perspective: 850px;
+  }
+
+  .carrusel-principal-tarjeta-3d.cara-1 {
+    transform: rotateY(0deg) translateZ(160px);
+  }
+
+  .carrusel-principal-tarjeta-3d.cara-2 {
+    transform: rotateY(120deg) translateZ(160px);
+  }
+
+  .carrusel-principal-tarjeta-3d.cara-3 {
+    transform: rotateY(240deg) translateZ(160px);
+  }
+
+  .carrusel-principal-juego-nombre,
+  .carrusel-principal-tarjeta-3d h3 {
+    font-size: 22px;
+  }
+
+  .card-juego {
+    width: 230px;
+    min-width: 230px;
+    height: 165px;
+  }
+}
+
+/* DESKTOP Y PANTALLAS GRANDES MIN WIDTH PX */
+@media (min-width: 1024px) {
+  .seccion-carrusel-principal > h2,
+  .carrusel-principal-titulo {
+    font-size: 2.5rem;
+  }
+
+  .hero-triptico > div,
+  .hero-foto-lateral {
+    width: 280px;
+    height: 250px;
+  }
+
+  .hero-triptico > a,
+  .hero-foto-central {
+    width: 440px;
+    height: 330px;
+  }
+
+  .card-juego {
+    width: 245px;
+    min-width: 245px;
+    height: 175px;
+  }
+
+  .seccion-categoria {
+    padding: 0 40px;
+  }
+}
+
+/* PANTALLAS MUY PEQUENAS PX */
+@media (max-width: 480px) {
+  .nav-principal {
+    padding: 0 10px;
+  }
+
+  .nav-principal > .nav-contenedor {
+    gap: 10px;
+  }
+
+  .nav-contenedor > .nav-izquierda {
+    gap: 8px;
+  }
+
+  .nav-izquierda > a > img {
+    height: 38px;
+  }
+
+  .nav-centro form > input[type="search"] {
+    height: 36px;
+    padding: 6px 36px 6px 12px;
+
+    font-size: var(--tamano-small);
+  }
+
+  .nav-centro form > button {
+    right: 10px;
+  }
+
+  .perfil-menu-contenedor > button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .perfil-menu-contenedor > button img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .perfil-menu-contenedor {
+    min-width: 140px;
+  }
+
+  .hero-triptico h3 {
+    font-size: 20px;
+  }
+
+  .card-juego {
+    width: 180px;
+    min-width: 180px;
+    height: 135px;
+  }
+
+  .card-juego > span {
+    bottom: 6px;
+
+    font-size: 14px;
+  }
+
+  .badge-premium-icon {
+    width: auto;
+    max-width: 80px;
+    height: 18px;
+  }
+}

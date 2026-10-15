@@ -1,0 +1,182 @@
+/* ESTILOS BASE RESET Y TIPOGRAFIA GLOBAL */
+
+/* TIPOGRAFIA LOCAL AUTOCONTENIDA JETBRAINS MONO */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../assets/fonts/JetBrainsMono-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/JetBrainsMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/JetBrainsMono-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/JetBrainsMono-Bold.ttf') format('truetype');
+}
+
+/* RESET ESTRICTO */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* RAIZ DEL DOCUMENTO */
+html {
+  color-scheme: dark;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  background-color: var(--color-fondo);
+  color: var(--color-blanco);
+  font-family: var(--fuente-principal);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* TIPOGRAFIA */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-blanco);
+  font-family: var(--fuente-principal);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+h1 {
+  font-size: 2.5rem; /* PX MOBILE */
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.8rem; /* PX MOBILE */
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 1.3rem; /* PX MOBILE */
+  line-height: 1.4;
+}
+
+p {
+  margin-bottom: 0.5rem;
+
+  color: var(--color-blanco);
+  font-size: var(--tamano-body);
+}
+
+small {
+  color: var(--color-gris-neutro);
+  font-size: var(--tamano-small);
+}
+
+/* ENLACES Y BOTONES BASE */
+a {
+  display: inline-block;
+
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+button, input, select, textarea {
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* IMAGENES Y MULTIMEDIA */
+img, svg {
+  max-width: 100%;
+  height: auto;
+
+  display: block;
+}
+
+/* BARRA DE SCROLL TEMATICA MILITAR */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-superficie-oscura);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primario);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primario-claro);
+}
+
+/* CLASES DE UTILIDAD COMUNES */
+.texto-centrado {
+  text-align: center;
+}
+
+.texto-secundario,
+.texto-acento {
+  color: var(--color-secundario);
+}
+
+.texto-primario-claro {
+  color: var(--color-primario-claro);
+}
+
+.texto-premium {
+  color: var(--color-premium);
+}
+
+.oculto {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+
+  white-space: nowrap;
+  border: 0;
+}
