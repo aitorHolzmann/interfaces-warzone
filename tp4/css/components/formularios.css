@@ -1,0 +1,202 @@
+/* COMPONENTE FORMULARIOS E INPUTS */
+
+/* GRUPO O FILA DE CAMPO EN FORMULARIOS DE AUTENTICACION */
+.panel-auth form > div:not(.auth-sociales):not(.recaptcha-card) {
+  position: relative;
+  width: 100%;
+  margin-bottom: 4px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  text-align: left;
+}
+
+.panel-auth form label {
+  color: var(--color-blanco);
+  font-size: var(--tamano-small);
+  font-weight: 400;
+}
+
+.campo-obligatorio {
+  margin-left: 2px;
+  color: var(--color-secundario);
+  font-weight: 700;
+}
+
+/* ENVOLTORIO ESPECIFICO CUANDO UN INPUT TIENE BOTON INTERNO */
+.campo-password {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.campo-password input {
+  padding-right: 44px;
+}
+
+/* INPUT CON FONDO BLANCO DEL PROTOTIPO ORIGINAL */
+.panel-auth form input:not([type="checkbox"]) {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 14px;
+
+  background-color: var(--color-blanco);
+  color: var(--color-negro);
+  font-size: var(--tamano-small);
+  border: 1px solid var(--color-gris-neutro);
+  border-radius: var(--radio-md);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel-auth form input:not([type="checkbox"])::placeholder {
+  color: var(--color-gris-neutro);
+}
+
+.panel-auth form input:not([type="checkbox"]):focus {
+  border-color: var(--color-secundario);
+  box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.3);
+  outline: none;
+}
+
+/* ICONO OJO VER OCULTAR CONTRASENA */
+.btn-toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: none;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.btn-toggle-password img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* CHECKBOX DE TERMINOS REGISTRO */
+.grupo-checkbox {
+  margin: 10px 0 14px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  color: var(--color-blanco);
+  font-size: var(--tamano-small);
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.grupo-checkbox input[type="checkbox"] {
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  margin-top: 1px;
+
+  accent-color: var(--color-secundario);
+  cursor: pointer;
+}
+
+.grupo-checkbox a {
+  color: var(--color-secundario);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* MOCKUP RECAPTCHA EN REGISTRO */
+.panel-auth form .recaptcha-card {
+  width: 100%;
+  max-width: 300px;
+  margin: 8px auto 14px;
+  padding: 8px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--color-recaptcha-fondo);
+  border: 1px solid var(--color-recaptcha-borde);
+  border-radius: var(--radio-sm);
+}
+
+.panel-auth form .recaptcha-card label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: var(--color-recaptcha-texto);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.panel-auth form .recaptcha-card label span {
+  color: var(--color-recaptcha-texto);
+}
+
+.panel-auth form .recaptcha-card input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+
+  accent-color: var(--color-recaptcha-azul);
+  cursor: pointer;
+}
+
+.panel-auth form .recaptcha-card .recaptcha-logo-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-auth form .recaptcha-card .recaptcha-logo-contenedor img {
+  width: 38px;
+  height: 34px;
+  object-fit: contain;
+}
+
+/* TEXTO EXPLICATIVO DE ERROR DEBAJO DEL INPUT */
+.msg-error {
+  min-height: 14px;
+  margin-top: 2px;
+
+  display: block;
+
+  color: var(--color-error);
+  font-size: 11px;
+  line-height: 1.2;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.msg-error.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ESTADOS DE VALIDACION VISUAL EN TIEMPO REAL */
+.input-valido {
+  border-color: var(--color-exito) !important;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3) !important;
+}
+
+.input-invalido {
+  border-color: var(--color-error) !important;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.3) !important;
+}
