@@ -1,0 +1,775 @@
+/* Escenario */
+.skyrecon-pantalla-wrapper {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-superficie-oscura);
+}
+
+.escenario-skyrecon {
+  position: relative;
+  width: 800px;
+  height: 500px;
+  overflow: hidden;
+
+  background-color: var(--color-negro);
+  border-left: 1px solid var(--color-sky-hud-borde);
+  border-right: 1px solid var(--color-sky-hud-borde);
+  box-shadow: 0 0 32px var(--color-sky-torre-sombra);
+  user-select: none;
+  cursor: pointer;
+}
+
+.escenario-skyrecon.en-turbo {
+  box-shadow: inset 0 0 28px var(--color-sky-turbo-glow), 0 0 32px var(--color-sky-torre-sombra);
+}
+
+.escenario-skyrecon.tiempo-critico {
+  box-shadow: inset 0 0 36px var(--color-sky-alerta-glow), 0 0 32px var(--color-sky-torre-sombra);
+}
+
+/* Parallax */
+.capa-parallax-contenedor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 500px;
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.capa-parallax {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 500px;
+
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  pointer-events: none;
+}
+
+.capa-parallax-suelo {
+  top: auto;
+  bottom: 0;
+}
+
+/* Capas de entidades */
+.capa-obstaculos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 436px;
+  z-index: 5;
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+.capa-elementos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 436px;
+  z-index: 6;
+
+  pointer-events: none;
+}
+
+.capa-feedback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 500px;
+  z-index: 8;
+
+  pointer-events: none;
+}
+
+/* Torres */
+.torre-par {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 436px;
+
+  will-change: transform;
+}
+
+.torre-segmento {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-superficie-oscura) 0%,
+    var(--color-sky-torre-cuerpo) 22%,
+    var(--color-sky-torre-claro) 55%,
+    var(--color-sky-torre-cuerpo) 84%,
+    var(--color-superficie-oscura) 100%
+  );
+  border-left: 2px solid var(--color-sky-torre-borde);
+  border-right: 2px solid var(--color-sky-torre-borde);
+  box-shadow: 4px 0 12px var(--color-sky-torre-sombra);
+}
+
+.torre-arriba {
+  top: 0;
+
+  border-bottom: 3px solid var(--color-secundario);
+}
+
+.torre-abajo {
+  border-top: 3px solid var(--color-secundario);
+}
+
+.torre-remate {
+  position: absolute;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: 20px;
+  box-sizing: border-box;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-primario-oscuro2) 0%,
+    var(--color-sky-torre-remate) 35%,
+    var(--color-primario-claro) 65%,
+    var(--color-primario-oscuro2) 100%
+  );
+  border: 2px solid var(--color-secundario);
+  border-radius: 3px;
+  box-shadow: 0 3px 8px var(--color-sky-torre-sombra);
+}
+
+.torre-arriba .torre-remate {
+  bottom: -3px;
+}
+
+.torre-abajo .torre-remate {
+  top: -3px;
+}
+
+.torre-par.superada .torre-remate {
+  border-color: var(--color-exito);
+  box-shadow: 0 0 14px var(--color-sky-torre-superada);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Dron */
+.jugador-contenedor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 7;
+
+  will-change: transform;
+  pointer-events: none;
+}
+
+.jugador-contenedor.invulnerable {
+  animation: parpadeo-invulnerable 0.2s linear infinite;
+}
+
+.jugador-sprite {
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+
+.jugador-sprite.vuela {
+  animation: ciclo-spritesheet var(--sprite-duracion) steps(var(--sprite-frames)) infinite;
+}
+
+.jugador-sprite.impulso {
+  animation:
+    ciclo-spritesheet var(--sprite-duracion) steps(var(--sprite-frames)) 1,
+    dron-estiramiento-impulso var(--sprite-duracion) ease-out 1;
+}
+
+.jugador-sprite.choca {
+  animation:
+    ciclo-spritesheet var(--sprite-duracion) steps(var(--sprite-frames)) 1,
+    dron-sacudida-choca var(--sprite-duracion) ease-out 1;
+}
+
+.jugador-sprite.turbo {
+  animation:
+    ciclo-spritesheet var(--sprite-duracion) steps(var(--sprite-frames)) infinite,
+    dron-pulso-turbo 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes ciclo-spritesheet {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: var(--sprite-desplazamiento) 0;
+  }
+}
+
+@keyframes dron-estiramiento-impulso {
+  0% {
+    transform: scale(1.08, 0.92);
+  }
+  50% {
+    transform: scale(0.96, 1.08);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dron-sacudida-choca {
+  0% {
+    transform: scale(1.18);
+  }
+  25% {
+    transform: translate(-4px, 3px) scale(0.95);
+  }
+  50% {
+    transform: translate(4px, -3px) scale(1.1);
+  }
+  75% {
+    transform: translate(-3px, -2px) scale(0.98);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes dron-pulso-turbo {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes parpadeo-invulnerable {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Elementos de escena */
+.elemento-escena {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  will-change: transform;
+}
+
+.elemento-sprite {
+  width: 100%;
+  height: 100%;
+
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  animation: ciclo-spritesheet var(--sprite-duracion) steps(var(--sprite-frames)) infinite;
+}
+
+.elemento-escena.tomado .elemento-sprite {
+  animation: elemento-desaparecer 0.28s ease-out forwards;
+}
+
+@keyframes elemento-desaparecer {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* Hitboxes debug */
+.hitbox-debug {
+  position: absolute;
+  box-sizing: border-box;
+
+  display: none;
+
+  background-color: var(--color-sky-hitbox-fondo);
+  border: 2px dashed var(--color-sky-hitbox-borde);
+  pointer-events: none;
+}
+
+.hitbox-debug-bonus {
+  background-color: var(--color-sky-hitbox-bonus-fondo);
+  border-color: var(--color-sky-hitbox-bonus);
+}
+
+.escenario-skyrecon.debug-hitboxes .hitbox-debug {
+  display: block;
+}
+
+/* Feedback flotante */
+.feedback-flotante {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2px 8px;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: var(--radio-sm);
+  text-shadow: 0 2px 6px var(--color-sky-sombra-texto);
+  white-space: nowrap;
+  animation: flotar-desvanecer 0.9s ease-out forwards;
+}
+
+.feedback-positivo {
+  color: var(--color-exito);
+}
+
+.feedback-turbo {
+  color: var(--color-sky-turbo);
+}
+
+.feedback-negativo {
+  color: var(--color-error);
+}
+
+@keyframes flotar-desvanecer {
+  0% {
+    transform: translate(-50%, 0) scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -42px) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* HUD */
+.sky-hud-superior {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  right: 14px;
+  z-index: 9;
+  padding: 8px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  background-color: var(--color-sky-hud-bg);
+  border: 1px solid var(--color-sky-hud-borde);
+  border-radius: var(--radio-md);
+  pointer-events: none;
+}
+
+.sky-hud-bloque {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.sky-hud-bloque-centro {
+  flex: 1;
+  max-width: 260px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.sky-hud-bloque-der {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sky-hud-etiqueta {
+  color: var(--color-solitaire-texto-secundario);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sky-hud-valor {
+  color: var(--color-blanco);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sky-hud-valor-tiempo {
+  color: var(--color-solitaire-ambar);
+}
+
+.sky-hud-valor-tiempo.critico {
+  color: var(--color-error);
+}
+
+.sky-hud-valor-record {
+  color: var(--color-primario-claro);
+}
+
+.sky-barra-tiempo-pista {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+
+  background-color: var(--color-sky-barra-fondo);
+  border-radius: var(--radio-sm);
+}
+
+.sky-barra-tiempo-relleno {
+  width: 50%;
+  height: 100%;
+
+  background-color: var(--color-exito);
+  border-radius: var(--radio-sm);
+  transition: width 0.12s linear, background-color 0.12s linear;
+}
+
+.sky-barra-tiempo-relleno.alerta {
+  background-color: var(--color-solitaire-ambar);
+}
+
+.sky-barra-tiempo-relleno.critico {
+  background-color: var(--color-error);
+}
+
+.sky-badge-turbo {
+  padding: 4px 10px;
+
+  display: none;
+  align-items: center;
+  gap: 6px;
+
+  background-color: var(--color-superficie-oscura);
+  color: var(--color-sky-turbo);
+  border: 1px solid var(--color-sky-turbo);
+  border-radius: var(--radio-sm);
+  box-shadow: 0 0 12px var(--color-sky-turbo-glow);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sky-badge-turbo.activo {
+  display: flex;
+}
+
+/* Overlays */
+.sky-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 500px;
+  z-index: 10;
+  padding: 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-sky-overlay-bg);
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.sky-overlay.oculto {
+  display: none;
+
+  opacity: 0;
+}
+
+.sky-panel-modal {
+  width: 100%;
+  max-width: 610px;
+  padding: 22px 26px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  background-color: var(--color-sky-panel-bg);
+  border: 2px solid var(--color-sky-hud-borde);
+  border-radius: var(--radio-md);
+  box-shadow: 0 12px 32px var(--color-sky-torre-sombra);
+  text-align: center;
+}
+
+.sky-badge-operacion {
+  padding: 4px 12px;
+
+  background-color: var(--color-primario-oscuro);
+  color: var(--color-primario-claro);
+  border: 1px solid var(--color-sky-hud-borde);
+  border-radius: var(--radio-sm);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.sky-panel-titulo {
+  margin: 0;
+
+  color: var(--color-blanco);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.sky-panel-desc {
+  margin: 0;
+
+  color: var(--color-solitaire-texto-secundario);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.sky-leyenda-elementos {
+  width: 100%;
+  padding: 10px 12px;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 10px;
+
+  background-color: var(--color-superficie-oscura);
+  border: 1px solid var(--color-solitaire-borde-panel);
+  border-radius: var(--radio-md);
+}
+
+.sky-leyenda-item {
+  flex: 1;
+  padding: 6px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.sky-leyenda-titulo {
+  color: var(--color-blanco);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sky-leyenda-efecto {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sky-leyenda-efecto.positivo {
+  color: var(--color-exito);
+}
+
+.sky-leyenda-efecto.turbo {
+  color: var(--color-sky-turbo);
+}
+
+.sky-leyenda-efecto.negativo {
+  color: var(--color-error);
+}
+
+.sky-fin-stats {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sky-fin-stat {
+  flex: 1;
+  padding: 10px 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  background-color: var(--color-superficie-oscura);
+  border: 1px solid var(--color-solitaire-borde-panel);
+  border-radius: var(--radio-sm);
+}
+
+.sky-fin-stat-label {
+  color: var(--color-solitaire-texto-secundario);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.sky-fin-stat-valor {
+  color: var(--color-blanco);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sky-fin-stat-valor.destacado {
+  color: var(--color-secundario);
+}
+
+.sky-badge-nuevo-record {
+  padding: 4px 12px;
+
+  display: none;
+
+  background-color: var(--color-primario);
+  color: var(--color-solitaire-ambar);
+  border: 1px solid var(--color-solitaire-ambar);
+  border-radius: var(--radio-sm);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.sky-badge-nuevo-record.visible {
+  display: inline-block;
+}
+
+.sky-modal-acciones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sky-btn-primario {
+  padding: 12px 28px;
+
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+  border: 2px solid var(--color-secundario);
+  border-radius: var(--radio-md);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sky-btn-primario:hover {
+  background-color: var(--color-primario-claro);
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px var(--color-sky-torre-sombra);
+}
+
+.sky-btn-secundario {
+  padding: 12px 20px;
+
+  background-color: transparent;
+  color: var(--color-blanco);
+  border: 2px solid var(--color-sky-hud-borde);
+  border-radius: var(--radio-md);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.sky-btn-secundario:hover {
+  border-color: var(--color-secundario);
+  color: var(--color-secundario);
+}
+
+.sky-atajo-hint {
+  margin: 0;
+
+  color: var(--color-solitaire-texto-secundario);
+  font-size: 12px;
+}
+
+/* Barra inferior e instrucciones */
+.sky-barra-controles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.barra-ejecucion .sky-btn-barra {
+  padding: 6px 12px;
+
+  background-color: var(--color-primario-oscuro2);
+  color: var(--color-blanco);
+  border: 1px solid var(--color-sky-hud-borde);
+  border-radius: var(--radio-sm);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.barra-ejecucion .sky-btn-barra:hover,
+.barra-ejecucion .sky-btn-barra.activo {
+  background-color: var(--color-primario);
+  border-color: var(--color-secundario);
+  color: var(--color-blanco);
+}
+
+.sky-reglas-badges {
+  margin-top: 8px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sky-regla-chip {
+  padding: 4px 10px;
+
+  background-color: var(--color-superficie-oscura);
+  color: var(--color-blanco);
+  border: 1px solid var(--color-sky-hud-borde);
+  border-radius: var(--radio-sm);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sky-regla-chip-positivo {
+  border-color: var(--color-exito);
+  color: var(--color-exito);
+}
+
+.sky-regla-chip-turbo {
+  border-color: var(--color-sky-turbo);
+  color: var(--color-sky-turbo);
+}
+
+.sky-regla-chip-negativo {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}

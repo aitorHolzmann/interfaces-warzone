@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKY RECON — Sala de Juego</title>
+
+  <!-- ESTILOS DEL SISTEMA -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components/botones.css">
+  <link rel="stylesheet" href="css/components/formularios.css">
+  <link rel="stylesheet" href="css/components/navegacion.css">
+  <link rel="stylesheet" href="css/components/comentarios.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/skyrecon.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACION SUPERIOR NAVBAR -->
+  <header class="nav-principal">
+    <div class="nav-contenedor">
+
+      <div class="nav-izquierda">
+        <button id="btn-toggle-sidebar" aria-label="Abrir menú de navegación">
+          <img src="assets/icons/menu.svg" alt="Menú lateral">
+        </button>
+        <a href="index.html" title="Volver a la página principal">
+          <img src="assets/logo.png" alt="Logotipo Plataforma">
+        </a>
+      </div>
+
+      <div class="nav-centro">
+        <form role="search" onsubmit="event.preventDefault();">
+          <input type="search" placeholder="Buscar juegos, géneros o batallas..." aria-label="Buscar juegos">
+          <button type="submit" aria-label="Ejecutar búsqueda">
+            <img src="assets/icons/icon-search.svg" alt="Buscar">
+          </button>
+        </form>
+      </div>
+
+      <div class="nav-derecha">
+        <div class="perfil-menu-contenedor">
+          <button type="button" id="btn-perfil" aria-expanded="false" aria-haspopup="true" aria-controls="menu-perfil" aria-label="Abrir opciones de usuario">
+            <img src="assets/icons/icon-profile.svg" alt="Avatar del soldado">
+          </button>
+
+          <div class="menu-desplegable-perfil" id="menu-perfil" role="menu" aria-label="Opciones de perfil">
+            <ul>
+              <li role="none"><a href="#" role="menuitem">Editar Perfil</a></li>
+              <li role="none"><a href="#" role="menuitem">Biblioteca</a></li>
+              <li role="none"><a href="login.html" role="menuitem">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- SIDEBAR OFF CANVAS -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <header>
+      <img src="assets/logo.png" alt="Logo" style="height: 36px;">
+      <button id="btn-cerrar-sidebar" aria-label="Cerrar menú">
+        <img src="assets/icons/icon-cerrar.svg" alt="Cerrar">
+      </button>
+    </header>
+    <span>Navegación</span>
+    <ul>
+      <li><a href="index.html"><img src="assets/icons/icon-home.svg" alt=""><span>Inicio</span></a></li>
+      <li><a href="index.html#top"><img src="assets/icons/icon-top.svg" alt=""><span>Top Juegos</span></a></li>
+      <li><a href="index.html#premium"><img src="assets/icons/icon-premium.svg" alt=""><span>Juegos Premium</span></a></li>
+      <li class="activo"><a href="index.html#accion"><img src="assets/icons/icon-action.svg" alt=""><span>Acción</span></a></li>
+      <li><a href="index.html#aventura"><img src="assets/icons/icon-adventure.svg" alt=""><span>Aventura</span></a></li>
+      <li><a href="index.html#estrategia"><img src="assets/icons/icon-strategy.svg" alt=""><span>Estrategia</span></a></li>
+      <li><a href="index.html#deportes"><img src="assets/icons/icon-sports.svg" alt=""><span>Deportes</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL SALA DE JUEGO SKY RECON -->
+  <main class="pagina-juego-main">
+
+    <!-- BREADCRUMBS -->
+    <nav class="breadcrumbs" aria-label="Ruta de navegación">
+      <a href="index.html">Home</a> &gt; <a href="index.html#accion">Acción</a> &gt; <span>Sky Recon</span>
+    </nav>
+
+    <!-- AREA DE EJECUCION DEL JUEGO -->
+    <section class="area-ejecucion-juego" aria-label="Área de Juego Sky Recon">
+
+      <div class="skyrecon-pantalla-wrapper en-juego">
+        <div id="escenario-skyrecon" class="escenario-skyrecon" aria-label="Escenario interactivo Sky Recon">
+
+          <!-- CAPAS DE PARALLAX -->
+          <div id="capa-parallax-contenedor" class="capa-parallax-contenedor" aria-hidden="true"></div>
+
+          <!-- OBSTACULOS Y ELEMENTOS DE ESCENA -->
+          <div id="capa-obstaculos" class="capa-obstaculos"></div>
+          <div id="capa-elementos" class="capa-elementos"></div>
+
+          <!-- JUGADOR -->
+          <div id="jugador" class="jugador-contenedor">
+            <div id="jugador-sprite" class="jugador-sprite vuela"></div>
+          </div>
+
+          <!-- FEEDBACK FLOTANTE -->
+          <div id="capa-feedback" class="capa-feedback" aria-hidden="true"></div>
+
+          <!-- HUD SUPERIOR -->
+          <div class="sky-hud-superior" aria-live="polite">
+            <div class="sky-hud-bloque">
+              <span class="sky-hud-etiqueta">TIEMPO DE VIDA</span>
+              <span id="hud-tiempo-restante" class="sky-hud-valor sky-hud-valor-tiempo">15.0s</span>
+            </div>
+
+            <div class="sky-hud-bloque-centro">
+              <span class="sky-hud-etiqueta">RESERVA DE COMBUSTIBLE</span>
+              <div class="sky-barra-tiempo-pista">
+                <div id="hud-barra-tiempo" class="sky-barra-tiempo-relleno"></div>
+              </div>
+            </div>
+
+            <div class="sky-hud-bloque-der">
+              <div id="hud-badge-turbo" class="sky-badge-turbo">
+                <span>TURBO</span>
+                <span id="hud-turbo-tiempo">3.0s</span>
+              </div>
+
+              <div class="sky-hud-bloque">
+                <span class="sky-hud-etiqueta">SOBREVIVIDO</span>
+                <span id="hud-tiempo-sobrevivido" class="sky-hud-valor">0.0s</span>
+              </div>
+
+              <div class="sky-hud-bloque">
+                <span class="sky-hud-etiqueta">RÉCORD</span>
+                <span id="hud-record-tiempo" class="sky-hud-valor sky-hud-valor-record">0.0s</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANTALLA DE CARGA -->
+          <div id="sky-overlay-cargando" class="sky-overlay">
+            <div class="sky-panel-modal">
+              <span class="sky-badge-operacion">SISTEMA DE VUELO</span>
+              <h2 class="sky-panel-titulo">SKY RECON</h2>
+              <p class="sky-panel-desc">Precargando spritesheets y capas tácticas de parallax...</p>
+            </div>
+          </div>
+
+          <!-- MENU INICIAL -->
+          <div id="sky-overlay-menu" class="sky-overlay oculto">
+            <div class="sky-panel-modal">
+              <span class="sky-badge-operacion">OPERACIÓN RECONOCIMIENTO AÉREO</span>
+              <h2 class="sky-panel-titulo">SKY RECON</h2>
+              <p class="sky-panel-desc">
+                Piloteá el dron táctico a contrarreloj. Arrancás con <strong>15 segundos</strong>: esquivá las torres, recolectá bidones de combustible para seguir en el aire y evitá bombas y misiles.
+              </p>
+
+              <div class="sky-leyenda-elementos">
+                <div class="sky-leyenda-item">
+                  <span class="sky-leyenda-titulo">Bidón Combustible</span>
+                  <span class="sky-leyenda-efecto positivo">Recargar: +6s</span>
+                </div>
+                <div class="sky-leyenda-item">
+                  <span class="sky-leyenda-titulo">Célula de Nitro</span>
+                  <span class="sky-leyenda-efecto turbo">Turbo 3s</span>
+                </div>
+                <div class="sky-leyenda-item">
+                  <span class="sky-leyenda-titulo">Bomba / Misil</span>
+                  <span class="sky-leyenda-efecto negativo">Impacto: -3s</span>
+                </div>
+                <div class="sky-leyenda-item">
+                  <span class="sky-leyenda-titulo">Torre Blindada</span>
+                  <span class="sky-leyenda-efecto negativo">Chocar: -4s</span>
+                </div>
+              </div>
+
+              <div class="sky-modal-acciones">
+                <button type="button" id="btn-sky-empezar" class="sky-btn-primario">DESPEGAR</button>
+              </div>
+              <p class="sky-atajo-hint">Clic en la pantalla o tecla <strong>Espacio</strong> para despegar e impulsar</p>
+            </div>
+          </div>
+
+          <!-- FIN DE MISION -->
+          <div id="sky-overlay-fin" class="sky-overlay oculto" role="dialog" aria-modal="true" aria-labelledby="sky-fin-titulo">
+            <div class="sky-panel-modal">
+              <span class="sky-badge-operacion">COMBUSTIBLE AGOTADO</span>
+              <h2 id="sky-fin-titulo" class="sky-panel-titulo">MISIÓN FINALIZADA</h2>
+              <span id="fin-badge-nuevo-record" class="sky-badge-nuevo-record">¡NUEVO RÉCORD PERSONAL!</span>
+
+              <div class="sky-fin-stats">
+                <div class="sky-fin-stat">
+                  <span class="sky-fin-stat-label">TIEMPO CON VIDA</span>
+                  <span id="fin-tiempo-sobrevivido" class="sky-fin-stat-valor destacado">0.0s</span>
+                </div>
+                <div class="sky-fin-stat">
+                  <span class="sky-fin-stat-label">RÉCORD</span>
+                  <span id="fin-record-tiempo" class="sky-fin-stat-valor">0.0s</span>
+                </div>
+                <div class="sky-fin-stat">
+                  <span class="sky-fin-stat-label">TORRES</span>
+                  <span id="fin-torres-superadas" class="sky-fin-stat-valor">0</span>
+                </div>
+                <div class="sky-fin-stat">
+                  <span class="sky-fin-stat-label">TURBOS</span>
+                  <span id="fin-turbos-recogidos" class="sky-fin-stat-valor">0</span>
+                </div>
+              </div>
+
+              <div class="sky-modal-acciones">
+                <button type="button" id="btn-sky-reintentar" class="sky-btn-primario">VOLVER A VOLAR</button>
+                <a href="index.html" class="sky-btn-secundario">Volver al Home</a>
+              </div>
+              <p class="sky-atajo-hint">Presioná <strong>Espacio</strong> o hacé clic para reintentar</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BARRA DE EJECUCION INFERIOR -->
+      <div class="barra-ejecucion">
+        <span id="game-barra-titulo">SKY RECON</span>
+
+        <div class="sky-barra-controles">
+          <button type="button" id="btn-sky-menu" class="sky-btn-barra" title="Volver al menú del juego">← Menú</button>
+          <button type="button" id="btn-sky-reiniciar" class="sky-btn-barra" title="Reiniciar partida">↺ Reiniciar</button>
+          <button type="button" id="btn-sky-hitboxes" class="sky-btn-barra" title="Mostrar u ocultar hitboxes (Tecla H)">Hitboxes (H)</button>
+        </div>
+
+        <div class="barra-ejecucion-acciones">
+          <div class="barra-ejecucion-iconos">
+            <button id="btn-guardar-juego" title="Guardar">
+              <img src="assets/icons/icon-save.svg" alt="Guardar">
+            </button>
+            <button id="btn-compartir-juego" title="Compartir">
+              <img src="assets/icons/icon-share.svg" alt="Compartir">
+            </button>
+            <button id="btn-fullscreen" title="Pantalla Completa">
+              <img src="assets/icons/icon-fullscreen.svg" alt="Pantalla Completa">
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECCION COMO JUGAR Y GALERIA MULTIMEDIA -->
+    <section class="seccion-about-juego" aria-label="Instrucciones y Galería">
+
+      <div class="contenedor-instrucciones">
+        <h2>COMO JUGAR?</h2>
+
+        <div class="lista-reglas">
+          <div class="card-controles">
+            <h3>Controles</h3>
+            <img src="assets/icons/icon-mouse.svg" alt="Controles con mouse y teclado">
+            <p>Clic o Barra Espaciadora para impulsar el dron hacia arriba. Tecla H para ver hitboxes.</p>
+          </div>
+
+          <article>
+            <h3>Objetivo y Sistema de Combustible</h3>
+            <p>
+              Arrancás con <strong>15 segundos</strong> de combustible que se consume con el tiempo. Para recargar debés recolectar <strong>Bidones de Combustible (+6s)</strong> entre las torres. Tu puntaje es el <strong>tiempo total con vida</strong> (empieza en 0.0s y guarda tu récord automáticamente). La partida termina únicamente cuando el temporizador llega a 0.0s.
+            </p>
+            <div class="sky-reglas-badges">
+              <span class="sky-regla-chip sky-regla-chip-positivo">Bidón Combustible: +6s</span>
+              <span class="sky-regla-chip sky-regla-chip-turbo">Célula Nitro: Turbo 3s</span>
+              <span class="sky-regla-chip sky-regla-chip-negativo">Bomba / Misil: -3s</span>
+              <span class="sky-regla-chip sky-regla-chip-negativo">Chocar Torre: -4s</span>
+            </div>
+          </article>
+
+          <article>
+            <h3>Dinámica del Escenario</h3>
+            <p>
+              Las torres blindadas varían en separación horizontal y altura, y su abertura se va cerrando progresivamente. Los impactos activan <strong>1.2 segundos de invulnerabilidad</strong> con animación de choque para que puedas recuperar el control sin perder de golpe.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <div class="contenedor-galeria">
+        <h2>GALERIA</h2>
+
+        <div class="galeria-grilla">
+          <div>
+            <img src="assets/images/skyrecon/portada-skyrecon.png" alt="Escena de vuelo táctico Sky Recon">
+          </div>
+          <div>
+            <img src="assets/images/skyrecon/parallax-1-cielo.png" alt="Capa de cielo crepuscular tileable">
+          </div>
+          <div>
+            <img src="assets/images/skyrecon/parallax-2-montanas.png" alt="Capa de cordillera y radares militares">
+          </div>
+          <div>
+            <img src="assets/images/skyrecon/parallax-3-base.png" alt="Capa media de base aérea y hangares">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECCION COMENTARIOS -->
+    <section class="seccion-comentarios" aria-label="Comentarios">
+      <h2>COMENTARIOS</h2>
+
+      <form class="comentario-form" id="form-nuevo-comentario" onsubmit="event.preventDefault();">
+        <div class="comentario-autor-actual">
+          <div>
+            <img src="assets/icons/icon-profile.svg" alt="Esteban">
+          </div>
+          <span>Esteban</span>
+        </div>
+
+        <div class="comentario-input-barra">
+          <textarea placeholder="Escribí tu récord o experiencia volando el dron..." id="input-comentario"></textarea>
+          <button type="button" aria-label="Enviar comentario">
+            <img src="assets/icons/icon-send.svg" alt="Enviar">
+          </button>
+        </div>
+      </form>
+
+      <div class="comentarios-lista" id="lista-comentarios">
+        <article class="comentario-item">
+          <div>
+            <img src="assets/icons/icon-profile.svg" alt="Aitor">
+          </div>
+          <div>
+            <header>
+              <strong>Aitor</strong>
+              <time>17/11/2026 20:15</time>
+            </header>
+            <p>
+              Me re copó el turbo cuando agarrás las células de energía, pero si te confiás te la ponés contra un misil. ¡Llegué a 64.2s de récord!
+            </p>
+          </div>
+        </article>
+
+        <article class="comentario-item">
+          <div>
+            <img src="assets/icons/icon-profile.svg" alt="Esteban">
+          </div>
+          <div>
+            <header>
+              <strong>Esteban</strong>
+              <time>17/11/2026 19:40</time>
+            </header>
+            <p>
+              Está bueno que no te mate de un golpe y te dé revancha agarrando bidones de combustible entre las torres.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FAT FOOTER INSTITUCIONAL -->
+  <footer class="footer-principal">
+    <div class="footer-contenedor">
+      <div class="footer-marca">
+        <img src="assets/logo.png" alt="Logotipo Plataforma">
+        <p>
+          Tu cuartel general para los mejores juegos de estrategia militar, shooters tácticos y colecciones premium. Únete a la batalla.
+        </p>
+      </div>
+
+      <div class="footer-links-grid">
+        <div>
+          <h4>Sobre nosotros</h4>
+          <ul>
+            <li><a href="#">Ayuda</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">Términos</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Categorias</h4>
+          <ul>
+            <li><a href="index.html#top">Top</a></li>
+            <li><a href="index.html#premium">Premium</a></li>
+            <li><a href="index.html#accion">Accion</a></li>
+            <li><a href="index.html#aventura">Aventura</a></li>
+            <li><a href="index.html#deportes">Deportes</a></li>
+            <li><a href="index.html#estrategia">Estrategia</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="#"><img src="assets/icons/icon-share.svg" alt=""> Compartir</a></li>
+            <li><a href="#"><img src="assets/icons/icon-instagram.svg" alt=""> Instagram</a></li>
+            <li><a href="#"><img src="assets/icons/icon-tiktok.svg" alt=""> TikTok</a></li>
+            <li><a href="#"><img src="assets/icons/icon-x.svg" alt=""> X</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-soporte">
+          <h4>Soporte</h4>
+          <div>
+            <a href="#">Centro de Ayuda</a>
+            <a href="#">Reportar un Bug</a>
+            <a href="#">Soporte</a>
+            <a href="#">Reglas de la comunidad</a>
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Guias de juego</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© Copyright - 2026</p>
+      <p>Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS DEL PORTAL Y JUEGO -->
+  <script src="js/main.js"></script>
+  <script src="js/skyrecon/configuracion.js"></script>
+  <script src="js/skyrecon/Parallax.js"></script>
+  <script src="js/skyrecon/Dron.js"></script>
+  <script src="js/skyrecon/Torre.js"></script>
+  <script src="js/skyrecon/ElementoEscena.js"></script>
+  <script src="js/skyrecon/GeneradorEscena.js"></script>
+  <script src="js/skyrecon/skyrecon.js"></script>
+</body>
+</html>

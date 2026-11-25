@@ -1,0 +1,98 @@
+/* VARIABLES Y TOKENS DE DISENO ESTETICA MILITAR CLONE WARS BASADO EN EL DESIGN SYSTEM DE FIGMA FILE KEY LI LH D OYOSSGXW EPN */
+
+:root {
+  /* PALETA CROMATICA PRIMARIA VERDE MILITAR */
+  --color-primario: #4B5320;
+  --color-primario-claro: #828E3B;
+  --color-primario-claro2: #66702D;
+  --color-primario-oscuro: #3B4119;
+  --color-primario-oscuro2: #2D3213;
+
+  /* PALETA SECUNDARIA NARANJA TACTICO */
+  --color-secundario: #FF6B00;
+
+  /* SUPERFICIES Y FONDOS */
+  --color-fondo: #2A302A;
+  --color-superficie-oscura: #141714;
+  --color-overlay-modal: rgba(10, 13, 10, 0.78);
+  --color-modal-fondo: #262E27;
+  --color-modal-caja-precio: #1B211C;
+  --color-modal-desc: #C2C8C2;
+
+  /* COLORES DE ESTADO Y TERCEROS */
+  --color-premium: #E5B80B;
+  --color-error: #E53935;
+  --color-exito: #4CAF50;
+  --color-facebook: #1877F2;
+  --color-google-fondo: #EFEFEF;
+  --color-recaptcha-fondo: #F9F9F9;
+  --color-recaptcha-borde: #D3D3D3;
+  --color-recaptcha-azul: #1A73E8;
+  --color-recaptcha-texto: #222222;
+
+  /* COLORES NEUTROS Y TEXTOS */
+  --color-blanco: #FFFFFF;
+  --color-gris-neutro: #777777;
+  --color-negro: #0A0D0A;
+
+  /* TIPOGRAFIAS */
+  --fuente-principal: 'JetBrains Mono', monospace;
+
+  /* TAMANOS DE FUENTE */
+  --tamano-h1: 64px;
+  --tamano-h2: 48px;
+  --tamano-h3: 24px;
+  --tamano-body: 16px;
+  --tamano-small: 14px;
+
+  /* BORDER RADIUS */
+  --radio-sm: 5px;
+  --radio-md: 8px;
+  --radio-lg: 16px;
+  --radio-card: 25px;
+  --radio-redondo: 50%;
+
+  /* GRADIENTES */
+  --gradiente-fondo-login: linear-gradient(to left, rgba(0, 0, 0, 1), transparent);
+  --gradiente-fondo-registro: linear-gradient(to right, rgba(0, 0, 0, 1), transparent);
+
+  /* DIMENSIONES DEL LAYOUT */
+  --ancho-maximo: 1440px;
+  --altura-nav: 81px;
+  --ancho-sidebar: 260px;
+
+  /* JUEGO BLOCKA */
+  --color-grilla-blocka: rgba(255, 255, 255, 0.15);
+  --color-pieza-hover: rgba(255, 107, 0, 0.5);
+  --color-victoria-glow: rgba(76, 175, 80, 0.6);
+
+  /* JUEGO PEG SOLITAIRE */
+  --color-solitaire-ambar: #FFAA00;
+  --color-solitaire-ambar-glow: rgba(255, 170, 0, 0.45);
+  --color-solitaire-bg-overlay: rgba(14, 17, 14, 0.94);
+  --color-solitaire-panel-bg: rgba(20, 24, 20, 0.9);
+  --color-solitaire-borde-panel: rgba(130, 142, 59, 0.35);
+  --color-solitaire-borde-activo: #FF6B00;
+  --color-solitaire-texto-secundario: #C2C8C2;
+
+  /* JUEGO SKY RECON (ENTREGABLE 5) */
+  --color-sky-hud-bg: rgba(14, 18, 14, 0.86);
+  --color-sky-hud-borde: rgba(130, 142, 59, 0.55);
+  --color-sky-overlay-bg: rgba(10, 14, 11, 0.84);
+  --color-sky-panel-bg: rgba(20, 26, 20, 0.94);
+  --color-sky-torre-cuerpo: #2C3428;
+  --color-sky-torre-claro: #45523D;
+  --color-sky-torre-remate: #4B5320;
+  --color-sky-torre-borde: #828E3B;
+  --color-sky-torre-sombra: rgba(0, 0, 0, 0.65);
+  --color-sky-torre-superada: rgba(76, 175, 80, 0.55);
+  --color-sky-turbo: #3BE8B0;
+  --color-sky-turbo-glow: rgba(59, 232, 176, 0.45);
+  --color-sky-alerta-glow: rgba(229, 57, 53, 0.65);
+  --color-sky-barra-fondo: rgba(255, 255, 255, 0.14);
+  --color-sky-hitbox-borde: #FF2E4D;
+  --color-sky-hitbox-fondo: rgba(255, 46, 77, 0.22);
+  --color-sky-hitbox-bonus: #3BE8B0;
+  --color-sky-hitbox-bonus-fondo: rgba(59, 232, 176, 0.22);
+  --color-sky-sombra-texto: rgba(0, 0, 0, 0.85);
+}

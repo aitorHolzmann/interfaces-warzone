@@ -1,0 +1,259 @@
+/* PAGINA LOGIN Y REGISTRO LOGIN CSS FIDELIDAD FIGMA OPTIMIZADO CON OPERADORES RELATIVOS Y ELIMINACION DE CLASES ATOMICAS */
+
+.pagina-auth-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-fondo);
+}
+
+/* ACOPLE DIRECTO DEL FOOTER A LA SECCION HERO */
+.pagina-auth-layout .footer-principal {
+  margin-top: 0;
+
+  border-radius: 0;
+}
+
+.auth-hero-seccion {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--altura-nav));
+  padding: 40px 10%;
+
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end; /* PANEL UBICADO HACIA LA DERECHA */
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* FONDOS ESPECIFICOS POR MODO */
+.auth-hero-seccion.modo-login {
+  background-image: var(--gradiente-fondo-login), url('../assets/fondo_login.jpg');
+}
+
+.auth-hero-seccion.modo-registro {
+  justify-content: flex-start;
+
+  background-image: var(--gradiente-fondo-registro), url('../assets/fondo_signin.jpg');
+}
+
+/* PANEL TRANSLUCIDO MILITAR */
+.panel-auth {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 420px;
+  padding: 24px 26px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: rgba(45, 52, 22, 0.7);
+  border: 1.5px solid var(--color-primario-claro);
+  border-radius: var(--radio-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+}
+
+/* ENCABEZADO DEL PANEL */
+.panel-auth > header {
+  margin-bottom: 14px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  text-align: center;
+}
+
+.panel-auth > header > img {
+  width: auto;
+  height: 38px;
+
+  object-fit: contain;
+}
+
+.panel-auth > header > h1 {
+  color: var(--color-primario-claro);
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.panel-auth > form {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay-exito {
+  position: absolute;
+  inset: -1.5px;
+  z-index: 20;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-exito);
+  border-radius: inherit;
+}
+
+.overlay-exito.visible {
+  display: flex;
+}
+
+.marca-exito {
+  position: relative;
+  width: 72px;
+  height: 72px;
+}
+
+.lado-corto,
+.lado-largo {
+  position: absolute;
+  height: 8px;
+
+  background-color: var(--color-blanco);
+  border-radius: var(--radio-sm);
+}
+
+.lado-corto {
+  top: 31px;
+  left: 12px;
+  width: 25px;
+  transform: rotate(45deg) scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+
+.lado-largo {
+  top: 49px;
+  left: 30px;
+  width: 43px;
+  transform: rotate(-45deg) scaleX(0);
+  transform-origin: left center;
+  transition: all 3s ease;
+}
+
+.marca-exito.dibujada .lado-corto {
+  transform: rotate(45deg) scaleX(1);
+}
+
+.marca-exito.dibujada .lado-largo {
+  transform: rotate(-45deg) scaleX(1);
+}
+
+/* ENLACE OLVIDO DE CONTRASENA */
+.panel-auth form > a {
+  width: 100%;
+  margin: 6px 0 14px;
+
+  display: block;
+
+  color: var(--color-blanco);
+  font-size: var(--tamano-small);
+  text-align: center;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.panel-auth form > a:hover {
+  color: var(--color-secundario);
+}
+
+/* TEXTO SEPARADOR */
+.auth-separador-texto {
+  margin: 14px 0 10px;
+
+  cursor: default;
+  color: var(--color-blanco);
+  font-size: var(--tamano-small);
+  text-align: center;
+}
+
+/* FILA DE BOTONES SOCIALES */
+.auth-sociales {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.auth-sociales > button {
+  min-height: 40px;
+  padding: 8px 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radio-md);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.auth-sociales > button:hover {
+  opacity: 0.9;
+}
+
+.auth-sociales img {
+  width: 18px;
+  height: 18px;
+}
+
+.auth-sociales > button:first-child {
+  background-color: var(--color-facebook);
+  color: var(--color-blanco);
+}
+
+.auth-sociales > button:last-child {
+  background-color: var(--color-google-fondo);
+  color: var(--color-negro);
+}
+
+/* PIE DE AUTENTICACION TOGGLE */
+.auth-toggle-footer {
+  margin-top: 14px;
+
+  color: var(--color-blanco);
+  font-size: var(--tamano-small);
+  text-align: center;
+}
+
+.auth-toggle-footer a,
+.auth-toggle-link {
+  color: var(--color-blanco);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.auth-toggle-footer a:hover,
+.auth-toggle-link:hover {
+  color: var(--color-secundario);
+}
+
+@media (max-width: 800px) {
+  .auth-hero-seccion,
+  .auth-hero-seccion.modo-registro {
+    padding: 30px 16px;
+
+    justify-content: center;
+  }
+}
+
